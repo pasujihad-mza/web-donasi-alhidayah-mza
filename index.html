@@ -279,13 +279,53 @@ header.hero{order:10}
 .admlogin:hover{background:#fff}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .lerr{color:#c0392b;font-size:.85rem;min-height:1.2em;margin:8px 0 0}
+
+/* ===== Pembaruan v3: coverflow, peta, tombol ===== */
+.cfwrap{position:relative;margin-top:14px}
+.cfhint{display:none;justify-content:center;align-items:center;gap:8px;font-size:.82rem;font-weight:600;color:var(--teal-d);margin-bottom:4px}
+.cfwrap.ov .cfhint{display:flex}.cfhint.done{display:none!important}
+.cfarr{display:inline-block;animation:nudge 1.2s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(6px)}}
+.cfbox{position:relative}
+.lokgrid.cfs{--cw:min(300px,78vw);position:relative;display:flex;gap:16px;margin-top:0;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;padding:18px calc(50% - var(--cw)/2) 22px;-webkit-overflow-scrolling:touch;scrollbar-width:none;align-items:stretch}
+.lokgrid.cfs::-webkit-scrollbar{display:none}
+.cfs>.lok{flex:0 0 var(--cw);scroll-snap-align:center;transform-origin:center;transition:box-shadow .35s;animation:cfIn .7s backwards;animation-delay:calc(var(--i,0)*90ms)}
+.cfs>.lok.side{cursor:pointer}
+.cfs>.lok.hl{box-shadow:0 0 0 3px var(--teal),0 16px 36px rgba(47,158,143,.38)}
+@keyframes cfIn{from{opacity:0;translate:0 26px}}
+.cfs.one{overflow:hidden;justify-content:center;padding-inline:0}
+.cfs.one>.lok:not(.ghost){animation:cfIn .7s backwards,cfFloat 5s ease-in-out .7s infinite}
+@keyframes cfFloat{50%{translate:0 -7px}}
+.cfs>.lok.ghost{pointer-events:none;opacity:.5;filter:blur(1.5px);animation:cfIn .7s backwards,cfSway 4.5s ease-in-out infinite;scroll-snap-align:none}
+.cfs>.lok.gl{transform:perspective(900px) rotateY(20deg) scale(.86)}.cfs>.lok.gr{transform:perspective(900px) rotateY(-20deg) scale(.86);animation-delay:0s,-2s}
+@keyframes cfSway{50%{translate:0 -9px}}
+.cfs.emp{padding-inline:2px;overflow:visible}.cfs.emp>.empty{flex:1 0 100%}
+.cfnav{display:none;position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.18);font-size:1.5rem;line-height:1;cursor:pointer;color:var(--teal-d);place-items:center;padding:0}
+.cfnav.prev{left:-4px}.cfnav.next{right:-4px}.cfwrap.ov .cfnav{display:grid}
+.cfdots{display:flex;justify-content:center;align-items:center;gap:7px;font-size:.8rem;color:var(--mute);min-height:10px}
+.dot2{width:9px;height:9px;border-radius:99px;border:0;padding:0;background:var(--line);cursor:pointer;transition:.3s}.dot2.on{background:var(--teal);width:22px}
+.skel{pointer-events:none}.sk{border-radius:12px;background:linear-gradient(90deg,var(--soft) 25%,#fff 50%,var(--soft) 75%);background-size:200% 100%;animation:shim 1.3s linear infinite}
+.sk1{height:130px}.sk2{height:22px;width:70%}.sk3{height:14px;width:90%}@keyframes shim{to{background-position:-200% 0}}
+.empty{background:var(--soft);border-style:solid;border-color:var(--line)}.empty b{display:block;color:var(--ink)}.empty p{margin:4px 0 0;font-size:.85rem}
+.lok p.jarak{color:var(--teal-d);font-weight:600}
+.maptools{position:absolute;top:10px;right:10px;z-index:1000;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.mt{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 13px;font:600 .76rem "Plus Jakarta Sans",sans-serif;color:var(--ink);box-shadow:0 4px 14px rgba(0,0,0,.2);cursor:pointer}
+.mt.rnd{width:42px;height:42px;padding:0;font-size:1.2rem;display:grid;place-items:center}.mt:hover{border-color:var(--teal)}
+.maptip{position:absolute;left:12px;right:12px;bottom:12px;z-index:1000;background:rgba(20,24,28,.82);color:#fff;border-radius:12px;padding:10px 14px;text-align:center;font-size:.85rem;opacity:0;transition:opacity .3s;pointer-events:none}.maptip.show{opacity:1}
+.btn.rekapbtn{background:linear-gradient(135deg,#f6c85f,#e9a23b);color:#2b2f36;font-weight:700;box-shadow:0 10px 26px rgba(233,162,59,.45);animation:glowG 2.8s ease-in-out infinite}
+.btn.rekapbtn:hover{background:linear-gradient(135deg,#f9d27a,#eeab4c)}@keyframes glowG{50%{box-shadow:0 12px 36px rgba(233,162,59,.75)}}
+.admlogin{background:linear-gradient(135deg,rgba(47,158,143,.16),rgba(217,164,65,.24));border:1px solid rgba(47,158,143,.3);color:var(--teal-d);font-weight:500;opacity:.62;animation:admG 5s ease-in-out infinite;transition:opacity .3s}
+.admlogin:hover{opacity:1;background:linear-gradient(135deg,rgba(47,158,143,.24),rgba(217,164,65,.34))}
+@keyframes admG{50%{transform:translateY(-2px);box-shadow:0 6px 16px rgba(47,158,143,.24)}}
+#heroVisit{border:0;background:none;box-shadow:none;animation:none;padding:0;margin-top:10px;font:400 .76rem Poppins,system-ui,sans-serif;color:var(--mute)}
+@media (prefers-reduced-motion:reduce){.cfarr,.admlogin,.sk,.btn.rekapbtn,.cfs>.lok,.cfs.one>.lok:not(.ghost),.cfs>.lok.ghost{animation:none}}
 </style>
 </head>
 <body>
 
 <nav><div class="wrap"><div class="brand"><img class="logo" data-logo alt="Logo Yayasan Majelis Dzikir Al Hidayah"><b data-t="namaYayasan">Yayasan Majelis Dzikir Al-Hidayah</b></div><div class="navr"><div class="menu" id="menu"><a href="#peta">Peta Surau</a><a href="#pembangunan">Pembangunan</a><a href="#kegiatan">Kegiatan</a><a href="#terkini">Donatur</a><a href="#album">Album</a><a href="#kontak">Kontak</a></div><a class="btn" href="#donasi" style="padding:8px 18px;font-size:.85rem">Donasi</a><button class="burger" id="burger" aria-label="Menu">☰</button></div></div></nav>
 
-<header class="hero"><button type="button" class="admlogin" id="admBtn" hidden>🔐 Login Admin</button><div class="wrap">
+<header class="hero"><button type="button" class="admlogin" id="admBtn" hidden>🔐 Khusus Admin</button><div class="wrap">
   <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
   <img class="logo big" data-logo alt="Logo Yayasan Majelis Dzikir Al-Hidayah Asia Pasifik">
   <div class="eyebrow" data-t="namaLengkap">Yayasan Majelis Dzikir Al-Hidayah Asia Pasifik</div>
@@ -354,7 +394,7 @@ header.hero{order:10}
   <div class="note" style="margin-bottom:6px">Penyaluran: <b id="pct">0%</b> dari dana terkumpul</div>
   <div class="bar"><i id="barI"></i></div>
   <p id="bulanIni" class="note" style="margin-top:18px;text-align:center"></p>
-  <p style="text-align:center"><button class="btn ghost" id="rekapBtn">Lihat rekap 3 bulan terakhir</button></p>
+  <p style="text-align:center"><button class="btn rekapbtn" id="rekapBtn">📊 Lihat rekap 3 bulan terakhir</button></p>
   <h3 style="margin-top:28px">Para donatur terbaru</h3>
   <div class="donors"><div class="card pick" id="pick" hidden></div><div class="spot" id="spot"></div><div class="tick"><div class="track" id="donors"></div></div></div>
 </div></section>
@@ -445,7 +485,7 @@ header.hero{order:10}
     <p style="color:var(--mute)" data-t="pembangunanIntro">Majelis kami membangun dan merawat surau di Dumai, Rupat, Bangko, dan daerah lainnya. Setiap sodaqoh pembangunan dicatat dan ditampilkan secara terbuka.</p>
   </div>
   <div class="lokgrid" id="bangunList"></div>
-  <p class="cta" style="margin-top:24px"><a class="btn" href="#donasi" id="btnSodaqoh">Sodaqoh Pembangunan Surau</a></p>
+  <p class="cta" style="margin-top:24px"><a class="btn" href="#donasi" id="btnSodaqoh">Sodaqoh Pembangunan Surau</a><a class="btn ghost" id="shPemb" href="#" target="_blank" rel="noopener" style="margin-left:8px">Bagikan ke WhatsApp</a></p>
 </div></section>
 
 <section id="sekolah"><div class="wrap fade">
@@ -455,6 +495,7 @@ header.hero{order:10}
     <p style="color:var(--mute)" data-t="sekolahIntro">Majelis Dzikir Al Hidayah juga menyelenggarakan sekolah-sekolah gratis bagi anak yatim dan dhuafa di beberapa lokasi. Anak-anak belajar ilmu dunia dan akhirat tanpa terbebani biaya.</p>
   </div>
   <div class="lokgrid" id="sekolahList"></div>
+  <p class="cta" style="margin-top:18px"><a class="btn ghost" id="shSek" href="#" target="_blank" rel="noopener">Bagikan ke WhatsApp</a></p>
 </div></section>
 
 <section id="kabar"><div class="wrap fade">
@@ -580,6 +621,21 @@ var CONFIG = {
   function hit(){$("total").textContent=rp(nominal||0)}
   $("nom").addEventListener("input",hit);hit();
   var lastDon={};
+  function salinTeks(t,b){var o=b.textContent;function ok(){b.textContent="Tersalin ✓";setTimeout(function(){b.textContent=o},1800)}
+    function fb(){var a=document.createElement("textarea");a.value=t;a.style.cssText="position:fixed;opacity:0";document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){b.textContent="Salin manual"}a.remove()}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,fb);else fb()}
+  function kecilkan(f,mx,q,cb){var r=new FileReader();r.onerror=function(){cb(null)};r.onload=function(){var im=new Image();im.onerror=function(){cb(null)};im.onload=function(){var s=Math.min(1,mx/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",q))};im.src=r.result};r.readAsDataURL(f)}
+  function terimaKasih(c,nn,tot,ref,mod,dd){
+    c.innerHTML="";
+    function e2(t,tx,cl){var e=document.createElement(t);if(tx)e.textContent=tx;if(cl)e.className=cl;e.style.textAlign="center";c.appendChild(e);return e}
+    e2("div","🤲").style.fontSize="2.6rem";
+    e2("h3","Jazakumullahu khairan, "+nn);
+    e2("p","Donasi Anda "+rp(tot)+" (ref "+ref+") sudah kami catat dan menunggu verifikasi pengurus. Setelah terverifikasi, nama dan doa Anda tampil di daftar donatur"+($("telp").value.trim()?", dan ucapan terima kasih dikirim ke WhatsApp Anda.":"."),"note");
+    e2("div","آجَرَكَ اللَّهُ فِيمَا أَعْطَيْتَ وَبَارَكَ لَكَ فِيمَا أَبْقَيْتَ","ar").style.fontSize="1.5rem";
+    e2("p","Semoga Allah memberi pahala atas apa yang Anda berikan dan memberkahi harta yang Anda sisakan. Aamiin.","doa");
+    function b2(t,f,g){var b=document.createElement("button");b.className="btn"+(g?" ghost":"");b.style.cssText="width:100%;margin-top:10px";b.textContent=t;b.onclick=f;c.appendChild(b)}
+    b2("Buat kartu terima kasih",function(){kartu(nn,dd)});b2("Tutup",function(){mod.remove()},true);
+  }
   function bayar(id,tot,kode,ref){
     var meta=null;METODE.forEach(function(g){g.i.forEach(function(x){if(x[0]===id)meta=x})});
     var mod=document.createElement("div"),c=document.createElement("div");mod.className="mod";c.className="card";mod.appendChild(c);
@@ -587,26 +643,42 @@ var CONFIG = {
     function box(l,v){var d=el("div","","rek");var a=document.createElement("div");a.className="note";a.textContent=l;var b=document.createElement("b");b.textContent=v;d.appendChild(a);d.appendChild(b)}
     function ol(a,t){if(t)el("b",t);var o=el("ol");a.forEach(function(s){var li=document.createElement("li");li.textContent=s;o.appendChild(li)})}
     function bt(t,f,g){var b=el("button",t,"btn"+(g?" ghost":""));b.style.cssText="width:100%;margin-top:10px";b.onclick=f}
+    function boxC(l,v,s){box(l,v);var d=c.lastChild,b=document.createElement("button");b.type="button";b.className="sbtn pri";b.textContent="Salin";b.style.marginTop="8px";b.onclick=function(){salinTeks(s||v,b)};d.appendChild(b)}
     var nn=$("anon").checked?"Hamba Allah":($("nama").value.trim()||"Hamba Allah"),dd=$("doa").value.trim();
     el("h3","Selesaikan pembayaran");
     el("p","Jazakumullahu khairan, "+nn+". Semoga Allah membalas kebaikanmu dengan berlipat ganda.","doa");
     if(dd)el("p","Doamu: “"+dd+"” akan dibaca dan diaminkan para pengunjung setelah donasi terverifikasi.","note");
-    box("Total yang harus dibayar",rp(tot));
+    boxC("Total yang harus dibayar",rp(tot),String(tot));
     el("p","Sudah termasuk kode unik "+kode+" (ikut menjadi donasi) agar pembayaran Anda mudah dikenali pengurus. Mohon transfer tepat sesuai total.","note");
     if(id==="qris"){
       var im=document.createElement("img");im.src=CONFIG.qris;im.alt="QRIS";im.style.cssText="width:100%;border-radius:12px";im.onerror=function(){im.replaceWith(document.createTextNode("Gambar QRIS belum dipasang admin."))};c.appendChild(im);
       ol(["Buka aplikasi e-wallet atau mobile banking apa saja.","Pilih Scan atau Bayar, arahkan ke QRIS di atas (atau unggah dari galeri).","Masukkan nominal tepat sesuai total, lalu konfirmasi."],"Cara bayar dengan QRIS");
     }else if(id==="bank"){
-      box("Bank",CONFIG.bank);box("Nomor rekening",CONFIG.rekening);box("Atas nama",CONFIG.atasNama);
+      box("Bank",CONFIG.bank);boxC("Nomor rekening",CONFIG.rekening,String(CONFIG.rekening).replace(/\D/g,""));box("Atas nama",CONFIG.atasNama);
       ol(["Masukkan kartu dan PIN, pilih Transfer.","Masukkan rekening tujuan dan nominal tepat sesuai total.","Periksa nama penerima, konfirmasi, simpan struk."],"Lewat ATM");
       ol(["Buka aplikasi mobile banking atau internet banking, pilih Transfer.","Masukkan rekening tujuan dan nominal tepat sesuai total.","Konfirmasi dengan PIN atau OTP, simpan bukti."],"Lewat mobile atau internet banking");
     }else{
-      box("Kirim ke "+meta[1],CONFIG.ewallet[id]);box("Atas nama",CONFIG.atasNama);
+      boxC("Kirim ke "+meta[1],CONFIG.ewallet[id],String(CONFIG.ewallet[id]||"").replace(/\D/g,""));box("Atas nama",CONFIG.atasNama);
       bt("Buka aplikasi "+meta[1],function(){location.href=meta[2]});
       ol(["Tekan tombol di atas untuk membuka aplikasi, atau buka manual.","Pilih Kirim atau Transfer, masukkan nomor tujuan di atas.","Isi nominal tepat sesuai total, konfirmasi, simpan bukti."],"");
     }
     el("p","Kode referensi: "+ref+". Status donasi: menunggu verifikasi. Setelah terverifikasi, nama dan doa Anda tampil di daftar donatur.","note");
     el("div","Keamanan: bayar hanya ke rekening atau QRIS di halaman ini. Pengurus tidak pernah meminta PIN, OTP, atau kata sandi. Sebelum konfirmasi, cocokkan nama penerima di aplikasi bank atau e-wallet Anda"+(CONFIG.qrisNama?" dengan: "+CONFIG.qrisNama:" dengan nama yayasan")+". Alamat resmi donasi: "+(CONFIG.situs||location.host),"safe");
+    var bk=el("div","","rek");bk.style.marginTop="14px";
+    var bl1=document.createElement("b");bl1.textContent="Unggah bukti transfer (opsional)";bk.appendChild(bl1);
+    var bn=document.createElement("div");bn.className="note";bn.textContent="Foto bukti membantu pengurus memverifikasi lebih cepat. Pastikan tidak ada data sensitif lain di foto.";bk.appendChild(bn);
+    var fi=document.createElement("input");fi.type="file";fi.accept="image/*";fi.style.cssText="display:block;margin-top:8px";bk.appendChild(fi);
+    var bs=document.createElement("div");bs.className="note";bs.setAttribute("aria-live","polite");bk.appendChild(bs);
+    fi.onchange=function(){var f=fi.files&&fi.files[0];if(!f)return;if(!CONFIG.formUrl){bs.textContent="Pengiriman bukti belum aktif.";return}
+      bs.textContent="Memproses foto…";
+      kecilkan(f,1280,.78,function(du){
+        if(!du){bs.textContent="Foto tidak dapat dibaca. Coba foto lain.";return}
+        if(du.length>2800000){bs.textContent="Foto terlalu besar. Coba foto lain.";return}
+        bs.textContent="Mengirim bukti…";
+        try{fetch(CONFIG.formUrl,{method:"POST",mode:"no-cors",body:JSON.stringify({aksi:"bukti",ref:ref,foto:du})}).then(function(){bs.textContent="Bukti sudah dikirim ke pengurus. Terima kasih."}).catch(function(){bs.textContent="Gagal mengirim. Periksa sinyal lalu coba lagi."})}catch(e){bs.textContent="Gagal mengirim. Coba lagi."}
+      });
+    };
+    bt("Saya sudah transfer",function(){terimaKasih(c,nn,tot,ref,mod,dd)});
     bt("Buat kartu terima kasih",function(){kartu(nn,dd)});
     var wanote=el("p","","note");
     bt("Kirim bukti via WhatsApp",function(){
@@ -884,12 +956,95 @@ var CONFIG = {
     pasangPendiri();
     /* ---------- Lokasi: peta, daftar, rute ---------- */
     var locs=[],lsig="",map=null,layer=null,rl=null,me=null,lim=30;
+    var pos=null,HS={};
+    function kecil(u,w){u=String(u||"");if(!/^https:\/\/(drive\.google\.com|lh3\.googleusercontent\.com)\//.test(u))return u;return u.replace(/([?&]sz=w)\d+/,"$1"+w).replace(/=w\d+(-h\d+)?(-[a-z0-9-]+)?$/,"=w"+w)}
+    function km(a,b){var r=Math.PI/180,dl=(b[0]-a[0])*r,dg=(b[1]-a[1])*r,q=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dg/2)*Math.sin(dg/2);return 12742*Math.asin(Math.sqrt(q))}
+    function fmtKm(d){return d<1?Math.round(d*1000)+" m":d.toFixed(1).replace(".",",")+" km"}
+    function porJarak(a,b){return(a.jarak==null||b.jarak==null)?0:a.jarak-b.jarak}
+    function kosong(g,ic,jd,ket){var d=el("div","","empty",g);el("div",ic,"",d).style.fontSize="2rem";el("b",jd,"",d);el("p",ket,"",d)}
+    function skel(id,n){var g=$(id);g.innerHTML="";for(var i=0;i<n;i++){var c=el("div","","lok skel",g);el("div","","sk sk1",c);el("div","","sk sk2",c);el("div","","sk sk3",c)}}
+    function HSr(id){if(HS[id])HS[id]()}
+    function cfInit(id){
+      var g=$(id);if(!g||HS[id])return;
+      var w=el("div","","cfwrap"),hn=el("div","","cfhint",w),bx=el("div","","cfbox",w),pv=el("button","‹","cfnav prev",bx),dt=el("div","","cfdots",w);
+      g.parentNode.insertBefore(w,g);bx.appendChild(g);var nx=el("button","›","cfnav next",bx);
+      hn.appendChild(document.createTextNode("Geser ke samping untuk melihat lokasi lainnya "));el("span","➜","cfarr",hn);
+      pv.type=nx.type="button";pv.setAttribute("aria-label","Geser ke kiri");nx.setAttribute("aria-label","Geser ke kanan");
+      g.classList.add("cfs");g.tabIndex=0;
+      function reals(){return[].slice.call(g.querySelectorAll(".lok:not(.skel):not(.ghost)"))}
+      function pusat(c){g.scrollTo({left:c.offsetLeft+c.offsetWidth/2-g.clientWidth/2,behavior:"smooth"})}
+      function build(){
+        [].forEach.call(g.querySelectorAll(".ghost"),function(x){x.remove()});
+        var rc=reals(),n=rc.length;
+        g.classList.toggle("emp",n===0);g.classList.toggle("one",n===1);
+        rc.forEach(function(c,i){c.style.setProperty("--i",i)});
+        if(n===1){[["gl",rc[0]],["gr",null]].forEach(function(p){var s=document.createElement("div");s.className="lok ghost "+p[0];s.setAttribute("aria-hidden","true");s.style.setProperty("--i",1);el("div","","sk sk1",s);el("div","","sk sk2",s);el("div","","sk sk3",s);if(p[1])g.insertBefore(s,p[1]);else g.appendChild(s)});rc[0].style.transform="";rc[0].style.opacity=""}
+        w.classList.toggle("ov",n>=2);
+      }
+      var tick=0,moved=false;
+      function fx(){
+        var rc=reals(),n=rc.length;if(n<2)return;
+        var mid=g.scrollLeft+g.clientWidth/2,best=0,bd=1e9;
+        rc.forEach(function(c,i){var d=c.offsetLeft+c.offsetWidth/2-mid,t=Math.min(1,Math.abs(d)/(c.offsetWidth+16));
+          c.style.transform="perspective(900px) rotateY("+((d<0?1:-1)*20*t).toFixed(1)+"deg) scale("+(1-.14*t).toFixed(3)+")";
+          c.style.opacity=(1-.5*t).toFixed(2);c.style.zIndex=String(10-Math.round(t*5));c.classList.toggle("side",t>.45);
+          if(Math.abs(d)<bd){bd=Math.abs(d);best=i}});
+        if(g.scrollLeft>30)moved=true;hn.classList.toggle("done",moved);
+        dt.innerHTML="";
+        if(n<=10){rc.forEach(function(c,k){var d=el("button","","dot2"+(k===best?" on":""),dt);d.type="button";d.setAttribute("aria-label","Ke lokasi "+(k+1));d.onclick=function(){pusat(c)}})}
+        else dt.textContent=(best+1)+" / "+n;
+        g._best=best;
+      }
+      function refresh(){build();g.scrollLeft=0;fx()}
+      pv.onclick=function(){var rc=reals();pusat(rc[Math.max(0,(g._best||0)-1)])};
+      nx.onclick=function(){var rc=reals();pusat(rc[Math.min(rc.length-1,(g._best||0)+1)])};
+      g.addEventListener("scroll",function(){cancelAnimationFrame(tick);tick=requestAnimationFrame(fx)},{passive:true});
+      g.addEventListener("click",function(e){var c=e.target.closest&&e.target.closest(".lok");if(c&&c.classList.contains("side")){e.preventDefault();e.stopPropagation();pusat(c)}},true);
+      window.addEventListener("resize",fx);
+      var pz=0,inV=true,red=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
+      function pause(){pz=Date.now()+12000}
+      ["pointerdown","mousemove","focusin"].forEach(function(ev){g.addEventListener(ev,pause,{passive:true})});
+      if("IntersectionObserver"in window)new IntersectionObserver(function(es){inV=es[0].isIntersecting}).observe(w);
+      if(!red)setInterval(function(){if(document.hidden||!inV||Date.now()<pz)return;var rc=reals();if(rc.length<2)return;pusat(rc[((g._best||0)+1)%rc.length])},5200);
+      refresh.pusat=pusat;HS[id]=refresh;
+    }
+    function sorot(x){var c=x.cel;if(!c||c.parentNode!==$("lokgrid"))return;if(HS.lokgrid)HS.lokgrid.pusat(c);c.classList.add("hl");setTimeout(function(){c.classList.remove("hl")},2200)}
+    function infoMsg(t){$("rutenote").textContent=t}
+    function setPos(a,b){
+      pos=[a,b];locs.forEach(function(x){x.jarak=km(pos,x.ll)});
+      if(map){if(me)map.removeLayer(me);me=L.marker(pos,{icon:L.divIcon({className:"pinw",html:'<div class="pin me"><span>📍</span></div>',iconSize:[34,34],iconAnchor:[17,34]}),title:"Lokasi Anda",zIndexOffset:900}).addTo(map)}
+      if(locs.length){renderMap(false);bangun();sekolah()}
+    }
+    function dapatPos(cb){
+      if(!navigator.geolocation){infoMsg("Perangkat ini belum mendukung lokasi.");return}
+      infoMsg("Mencari lokasi Anda… (izinkan akses lokasi di peramban)");
+      navigator.geolocation.getCurrentPosition(function(p){setPos(p.coords.latitude,p.coords.longitude);if(cb)cb()},function(er){infoMsg(er&&er.code===1?"Izin lokasi ditolak. Aktifkan izin lokasi di pengaturan peramban, lalu coba lagi.":"Lokasi belum ditemukan. Pastikan GPS aktif, lalu coba lagi.")},{enableHighAccuracy:true,timeout:15000,maximumAge:30000});
+    }
+    function peralatanPeta(){
+      var mb=$("petamap"),tl=el("div","","maptools",mb);
+      function tb(t,cls,ttl,fn){var b=el("button",t,"mt "+cls,tl);b.type="button";b.title=ttl;b.setAttribute("aria-label",ttl);b.onclick=fn}
+      tb("🎯","rnd","Pusatkan peta ke posisi saya",function(){dapatPos(function(){map.flyTo(pos,Math.max(map.getZoom(),14));infoMsg("Peta dipusatkan ke posisi Anda.")})});
+      tb("📍 Lokasi saya","","Tampilkan lokasi saya",function(){dapatPos(function(){map.flyTo(pos,15);infoMsg("Lokasi Anda ditampilkan di peta. Kartu lokasi kini diurutkan dari yang terdekat.")})});
+      tb("🧭 Titik terdekat dengan saya","","Titik terdekat dengan saya",function(){dapatPos(function(){
+        var b=null;locs.forEach(function(x){if(!b||x.jarak<b.jarak)b=x});
+        if(!b){infoMsg("Belum ada lokasi yang ditambahkan.");return}
+        map.fitBounds(L.latLngBounds([pos,b.ll]),{padding:[60,60],maxZoom:16});
+        L.popup().setLatLng(b.ll).setContent(pop(b)).openOn(map);
+        infoMsg("Titik terdekat: "+b.nama+(b.wil?" ("+b.wil+")":"")+", sekitar "+fmtKm(b.jarak)+" dari Anda (garis lurus). Gunakan tombol rute untuk petunjuk jalan.");
+      })});
+      L.DomEvent.disableClickPropagation(tl);
+      if(window.matchMedia&&matchMedia("(pointer:coarse)").matches){
+        var tip=el("div","Gunakan dua jari untuk menggeser peta","maptip",mb),tt=0;
+        mb.addEventListener("touchmove",function(e){if(e.touches.length===1){tip.classList.add("show");clearTimeout(tt);tt=setTimeout(function(){tip.classList.remove("show")},1300)}},{passive:true});
+      }
+      if(navigator.permissions&&navigator.permissions.query)navigator.permissions.query({name:"geolocation"}).then(function(s){if(s.state==="granted")dapatPos(null)}).catch(function(){});
+    }
     function initMap(){
       if(map)return;
       if(typeof L==="undefined"){$("petamap").textContent="Peta tidak dapat dimuat. Gunakan daftar lokasi di bawah.";$("petamap").style.cssText+=";display:grid;place-items:center;padding:20px;text-align:center";return}
-      map=L.map("petamap",{scrollWheelZoom:false}).setView(CONFIG.pusatPeta||[1.9,101.3],CONFIG.zoomPeta||9);
+      map=L.map("petamap",{scrollWheelZoom:false,dragging:!(window.matchMedia&&matchMedia("(pointer:coarse)").matches)}).setView(CONFIG.pusatPeta||[1.9,101.3],CONFIG.zoomPeta||9);
       L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap"}).addTo(map);
-      layer=L.layerGroup().addTo(map);
+      layer=L.layerGroup().addTo(map);peralatanPeta();
       map.on("click",function(){map.scrollWheelZoom.enable()});
       setTimeout(function(){map.invalidateSize()},400);
       window.addEventListener("load",function(){map.invalidateSize()});
@@ -908,9 +1063,10 @@ var CONFIG = {
       var c=el("div","","lok"),tg=el("div","","tags",c);
       el("span",x.jenis==="sekolah"?"Sekolah gratis":"Surau","tg"+(x.jenis==="sekolah"?" sch":""),tg);
       if(x.status&&/bangun|rencana|renovasi/.test(x.status))el("span",/rencana/.test(x.status)?"Rencana pembangunan":(/renovasi/.test(x.status)?"Sedang direnovasi":"Sedang dibangun"),"tg bgn",tg);
-      if(x.foto){var im=document.createElement("img");im.src=x.foto;im.alt=x.nama;im.loading="lazy";im.style.cssText="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px";im.onerror=function(){im.remove()};c.appendChild(im)}
+      if(x.foto){var im=document.createElement("img");im.src=kecil(x.foto,640);im.alt=x.nama;im.loading="lazy";im.decoding="async";im.style.background="var(--soft)";im.style.cssText="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:14px";im.onerror=function(){im.remove()};c.appendChild(im)}
       el("h3",x.nama,"",c);
       if(x.wil)el("p","📍 "+x.wil,"",c);
+      if(x.jarak!=null)el("p","📏 "+fmtKm(x.jarak)+" dari Anda","jarak",c);
       if(x.alamat)el("p",x.alamat,"",c);
       if(x.ket)el("p",x.ket,"",c);
       if(x.koor||x.kontak){var k=el("div","","koor",c);el("small","Koordinator","",k);if(x.koor)el("b",x.koor,"",k);if(x.kontak)el("span",x.kontak,"",k)}
@@ -935,7 +1091,8 @@ var CONFIG = {
       var b=el("div","","btns",d);btn("Rute Google Maps","pri",dirUrl(x),null,b);btn("Rute di peta","",null,function(){rute(x)},b);
       return d;
     }
-    function filt(){
+    function filt(){return filt0().sort(porJarak)}
+    function filt0(){
       var q=$("cari").value.trim().toLowerCase(),w=$("fWil").value,j=$("fJenis").value;
       return locs.filter(function(x){
         if(w&&x.wil!==w)return false;if(j&&x.jenis!==j)return false;
@@ -943,14 +1100,14 @@ var CONFIG = {
       });
     }
     function renderMap(fit){
-      var f=filt(),g=$("lokgrid");g.innerHTML="";
+      var f=filt(),g=$("lokgrid");g.innerHTML="";setTimeout(function(){HSr("lokgrid")},0);
       if(layer)layer.clearLayers();
       if(!f.length)el("div",locs.length?"Tidak ada lokasi yang cocok dengan pencarian.":"Belum ada lokasi yang ditambahkan admin.","empty",g);
-      f.slice(0,lim).forEach(function(x){g.appendChild(card(x,{donasi:x.jenis==="surau"}))});
-      if(f.length>lim){var mb=el("button","Tampilkan lebih banyak ("+(f.length-lim)+" lagi)","btn ghost",g);mb.style.gridColumn="1/-1";mb.onclick=function(){lim+=30;renderMap(false)}}
+      f.forEach(function(x){x.cel=g.appendChild(card(x,{donasi:x.jenis==="surau"}))});
+      
       if(layer)f.forEach(function(x){
         var ic=L.divIcon({className:"pinw",html:'<div class="pin'+(x.jenis==="sekolah"?" sch":"")+'"><span>'+(x.jenis==="sekolah"?"🏫":"🕌")+'</span></div>',iconSize:[34,34],iconAnchor:[17,34],popupAnchor:[0,-30]});
-        x.m=L.marker(x.ll,{icon:ic,title:x.nama}).bindPopup(pop(x));layer.addLayer(x.m);
+        x.m=L.marker(x.ll,{icon:ic,title:x.nama}).bindPopup(pop(x));x.m.on("click",function(){sorot(x)});layer.addLayer(x.m);
       });
       if(map&&fit&&f.length){
         if(f.length===1)map.setView(f[0].ll,15);
@@ -985,15 +1142,15 @@ var CONFIG = {
       },function(){rn.textContent="Izin lokasi ditolak. Gunakan tombol Rute Google Maps, atau izinkan akses lokasi lalu coba lagi."},{enableHighAccuracy:true,timeout:15000});
     }
     function bangun(){
-      var g=$("bangunList");g.innerHTML="";
-      var l=locs.filter(function(x){return x.jenis==="surau"&&/bangun|rencana|renovasi/.test(x.status)});
-      if(!l.length){el("div","Daftar surau yang sedang dibangun akan tampil di sini.","empty",g);return}
+      var g=$("bangunList"),sl0=g.scrollLeft;g.innerHTML="";setTimeout(function(){HSr("bangunList");g.scrollLeft=sl0},0);
+      var l=locs.filter(function(x){return x.jenis==="surau"&&/bangun|rencana|renovasi/.test(x.status)}).sort(porJarak);
+      if(!l.length){kosong(g,"🏗️","Belum ada surau yang sedang dibangun","Daftar pembangunan akan tampil di sini beserta progres sodaqohnya.");return}
       l.forEach(function(x){g.appendChild(card(x,{donasi:true,progress:true}))});
     }
     function sekolah(){
-      var g=$("sekolahList");g.innerHTML="";
-      var l=locs.filter(function(x){return x.jenis==="sekolah"});
-      if(!l.length){el("div","Lokasi sekolah gratis akan tampil di sini.","empty",g);return}
+      var g=$("sekolahList");g.innerHTML="";setTimeout(function(){HSr("sekolahList")},0);
+      var l=locs.filter(function(x){return x.jenis==="sekolah"}).sort(porJarak);
+      if(!l.length){kosong(g,"🏫","Lokasi sekolah gratis segera hadir","Pengurus sedang melengkapi datanya. Silakan kembali lagi nanti, insya Allah akan tampil di sini.");return}
       l.forEach(function(x){g.appendChild(card(x,{}))});
     }
     function afterLoad(){
@@ -1008,12 +1165,13 @@ var CONFIG = {
     }
     function pakaiLok(a,demo){
       var sg=JSON.stringify(a.map(function(x){return[x.nama,x.ll,x.koor,x.kontak,x.status,x.ket,x.target,x.foto,x.alamat,x.wil,x.jenis]}));
-      if(sg===lsig)return;lsig=sg;locs=a;
+      if(sg===lsig)return;lsig=sg;locs=a;if(pos)locs.forEach(function(x){x.jarak=km(pos,x.ll)});
       $("petanote").textContent=demo?"Contoh tampilan. Lokasi asli muncul setelah admin mengisi sheet Lokasi.":"Sentuh penanda di peta untuk melihat keterangan, koordinator, dan rute menuju lokasi.";
       afterLoad();
     }
     ["cari","fWil","fJenis"].forEach(function(id){$(id).addEventListener(id==="cari"?"input":"change",function(){lim=30;renderMap(true)})});
     onTotals=function(){if(locs.length)bangun()};
+    ["lokgrid","bangunList","sekolahList"].forEach(cfInit);
     initMap();
 
     /* ---------- Program donasi: pilihan surau ---------- */
@@ -1144,6 +1302,11 @@ var CONFIG = {
           $("petanote").textContent="Data belum dapat dimuat. Coba muat ulang halaman.";
         });
     }
+    var su=CONFIG.situs||location.href.split("#")[0];
+    function waU(t,hs){return"https://wa.me/?text="+encodeURIComponent(t+" "+su+hs)}
+    $("shPemb").href=waU("Ayo ikut membangun rumah Allah bersama Yayasan Majelis Dzikir Al Hidayah.","#pembangunan");
+    $("shSek").href=waU("Sekolah gratis untuk anak yatim dan dhuafa, Yayasan Majelis Dzikir Al Hidayah.","#sekolah");
+    skel("lokgrid",3);skel("bangunList",3);skel("sekolahList",2);
     pasangPendiri();cekKeg();muatSemua();
     setInterval(muatSemua,Math.max(20,CONFIG.refreshDetik)*1000);
   })();
@@ -1576,7 +1739,7 @@ function buka(){
 return {buka:buka,tutup:tutupPanel};
 
 })();
-function ubahTombol(){btn.textContent=getTok()?"🛠️ Panel Admin":"🔐 Login Admin"}
+function ubahTombol(){btn.textContent=getTok()?"🛠️ Panel Admin":"🔐 Khusus Admin"}
 function bukaLogin(pesan){
   var mod=document.createElement("div"),f=document.createElement("form");mod.className="mod";f.className="card";f.autocomplete="on";mod.appendChild(f);
   function el(t,tx,cl){var e=document.createElement(t);if(tx)e.textContent=tx;if(cl)e.className=cl;f.appendChild(e);return e}
