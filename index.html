@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://router.project-osrm.org; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://geocoding-api.open-meteo.com https://script.google.com https://script.googleusercontent.com https://router.project-osrm.org; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <title>Berbagi Kasih untuk Yatim & Dhuafa — Yayasan Majelis Dzikir Al Hidayah</title>
 <meta name="description" content="Bergabunglah menjadi donatur anak yatim dan fakir miskin Yayasan Majelis Dzikir Al-Hidayah Asia Pasifik, Dumai – Rupat – Bangko.">
@@ -321,6 +321,12 @@ header.hero{order:10}
 @media (prefers-reduced-motion:reduce){.cfarr,.admlogin,.sk,.btn.rekapbtn,.cfs>.lok,.cfs.one>.lok:not(.ghost),.cfs>.lok.ghost{animation:none}}
 </style>
 <style id="hd-style">
+.hd-modal .hd-q{width:100%;margin:0 0 4px;padding:12px 14px;border-radius:12px;border:1.5px solid #d6a840;background:#0d0a05;color:#fff;font:500 16px "Plus Jakarta Sans",sans-serif;outline:0}
+.hd-modal .hd-q::placeholder{color:#9b8a62}.hd-modal .hd-q:focus{box-shadow:0 0 0 3px rgba(240,190,70,.3)}
+.hd-modal .hd-res{max-height:32vh;overflow:auto}
+.menu .admlogin{position:static;background:none;border:0;box-shadow:none;animation:none;opacity:1;backdrop-filter:none;border-radius:0;padding:0;color:var(--ink);font:500 .85rem "Plus Jakarta Sans",Poppins,sans-serif;text-align:left;cursor:pointer;white-space:nowrap}
+.menu .admlogin:hover{color:var(--teal-d);background:none}
+@media (max-width:980px){.menu .admlogin{padding:13px 0;border-top:1px solid var(--line);width:100%;font-size:.95rem}}
 /* ===== HEADER BARU: gaya Black & Gold Islamic Dashboard ===== */
 nav{background:#fff;border-bottom:0;box-shadow:0 4px 16px rgba(0,0,0,.09)}
 nav .wrap{height:64px}
@@ -398,9 +404,9 @@ nav a.btn{background:linear-gradient(135deg,#0a6e47,#12985f);box-shadow:0 6px 16
 </head>
 <body>
 
-<nav><div class="wrap"><div class="brand"><img class="logo" data-logo alt="Logo Yayasan Majelis Dzikir Al Hidayah"><b data-t="namaYayasan">Yayasan Majelis Dzikir Al-Hidayah</b></div><div class="navr"><div class="menu" id="menu"><a href="#peta">Peta Surau</a><a href="#pembangunan">Pembangunan</a><a href="#kegiatan">Kegiatan</a><a href="#terkini">Donatur</a><a href="#album">Album</a><a href="#kontak">Kontak</a></div><a class="btn" href="#donasi" style="padding:8px 18px;font-size:.85rem">Donasi</a><button class="burger" id="burger" aria-label="Menu">☰</button></div></div></nav>
+<nav><div class="wrap"><div class="brand"><img class="logo" data-logo alt="Logo Yayasan Majelis Dzikir Al Hidayah"><b data-t="namaYayasan">Yayasan Majelis Dzikir Al-Hidayah</b></div><div class="navr"><div class="menu" id="menu"><a href="#peta">Peta Surau</a><a href="#pembangunan">Pembangunan</a><a href="#kegiatan">Kegiatan</a><a href="#terkini">Donatur</a><a href="#album">Album</a><a href="#kontak">Kontak</a><button type="button" class="admlogin" id="admBtn" hidden>🔐 Khusus Admin</button></div><a class="btn" href="#donasi" style="padding:8px 18px;font-size:.85rem">Donasi</a><button class="burger" id="burger" aria-label="Menu">☰</button></div></div></nav>
 
-<header class="hero"><button type="button" class="admlogin" id="admBtn" hidden>🔐 Khusus Admin</button>
+<header class="hero">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <linearGradient id="hdgold" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a5f12"/><stop offset=".3" stop-color="#ffe08a"/><stop offset=".6" stop-color="#d9a032"/><stop offset="1" stop-color="#7a520e"/></linearGradient>
 <linearGradient id="hdg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d7b52"/><stop offset="1" stop-color="#053d29"/></linearGradient>
@@ -1930,25 +1936,47 @@ $("hdSet").addEventListener("click",function(){
   var ov=document.createElement("div");ov.className="hd-modal";
   var bx=document.createElement("div");bx.className="box";ov.appendChild(bx);
   function mk(tag,txt,cls,par){var e=document.createElement(tag);if(txt)e.textContent=txt;if(cls)e.className=cls;(par||bx).appendChild(e);return e}
-  mk("h3","Atur Lokasi");mk("p","Jam, tanggal, dan waktu sholat mengikuti lokasi yang dipilih.");
+  mk("h3","Atur Lokasi");mk("p","Cari kota atau daerah Anda. Jam, tanggal, dan waktu sholat mengikuti lokasi yang dipilih.");
+  var q=mk("input","","hd-q");q.type="search";q.placeholder="Cari kota atau kecamatan…";q.setAttribute("aria-label","Cari lokasi");q.autocomplete="off";q.maxLength=60;
+  var g=mk("button","🎯 Gunakan lokasi saya (GPS)","gps");g.type="button";
+  var res=mk("div","","hd-res"),ms=mk("p","","msg");
   function tutup(){ov.remove();document.removeEventListener("keydown",esc)}
   function esc(e){if(e.key==="Escape")tutup()}
-  PL.forEach(function(l){var b=mk("button","📍 "+l.n,cur.n===l.n?"on":"");b.type="button";b.addEventListener("click",function(){setLok(l);tutup()})});
-  var g=mk("button","🎯 Gunakan lokasi saya (GPS)","gps");g.type="button";var ms=mk("p","","msg");
+  function info(t,err){ms.style.color=err?"#ffb4a0":"#d9cba8";ms.textContent=t}
+  function okTz(z){try{new Intl.DateTimeFormat("en-GB",{timeZone:z});return z}catch(e){return"Asia/Jakarta"}}
+  var tm=0,seq=0;
+  function cari(){
+    var v=q.value.trim();clearTimeout(tm);
+    if(v.length<3){seq++;res.textContent="";info(v?"Ketik minimal 3 huruf.":"");return}
+    var my=++seq;info("Mencari…");
+    fetch("https://geocoding-api.open-meteo.com/v1/search?name="+encodeURIComponent(v)+"&count=8&language=id&format=json").then(function(r){return r.json()}).then(function(j){
+      if(my!==seq)return;res.textContent="";var L=(j&&j.results)||[];
+      if(!L.length){info("Lokasi tidak ditemukan. Coba nama kota lain.",1);return}
+      info("");
+      L.forEach(function(x){
+        if(typeof x.latitude!=="number"||typeof x.longitude!=="number")return;
+        var b=mk("button","📍 "+[x.name,x.admin1,x.country].filter(Boolean).join(", "),"",res);b.type="button";
+        b.addEventListener("click",function(){setLok({n:x.name+(x.admin1?", "+x.admin1:""),lat:x.latitude,lng:x.longitude,tz:okTz(x.timezone||"Asia/Jakarta")});tutup()});
+      });
+    }).catch(function(){if(my!==seq)return;res.textContent="";info("Tidak bisa terhubung. Periksa internet Anda.",1)});
+  }
+  q.addEventListener("input",function(){clearTimeout(tm);tm=setTimeout(cari,400)});
+  q.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();cari()}});
   g.addEventListener("click",function(){
-    if(!navigator.geolocation){ms.textContent="Perangkat ini tidak mendukung GPS.";return}
-    ms.style.color="#d9cba8";ms.textContent="Mencari lokasi…";
+    if(!navigator.geolocation){info("Perangkat ini tidak mendukung GPS.",1);return}
+    info("Mencari lokasi…");
     navigator.geolocation.getCurrentPosition(function(p){
       var tz="Asia/Jakarta";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||tz}catch(e){}
       setLok({n:"Lokasi Saya",lat:p.coords.latitude,lng:p.coords.longitude,tz:tz});tutup();
-    },function(){ms.style.color="#ffb4a0";ms.textContent="Izin lokasi ditolak. Pilih salah satu kota di atas."},{timeout:10000,maximumAge:600000});
+    },function(){info("Izin lokasi ditolak. Cari nama kota di kolom atas.",1)},{timeout:10000,maximumAge:600000});
   });
   var c=mk("button","Tutup");c.type="button";c.style.textAlign="center";c.addEventListener("click",tutup);
   ov.addEventListener("click",function(e){if(e.target===ov)tutup()});document.addEventListener("keydown",esc);
-  document.body.appendChild(ov);
+  document.body.appendChild(ov);setTimeout(function(){q.focus()},50);
 });
 tick();setInterval(tick,1000);
 })();
 </script>
+<script>(function(){var b=document.getElementById("admBtn"),m=document.getElementById("menu");if(b&&m)b.addEventListener("click",function(){m.classList.remove("open")})})();</script>
 </body>
 </html>
